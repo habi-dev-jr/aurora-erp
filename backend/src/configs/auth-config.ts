@@ -1,4 +1,7 @@
-import { EnvFrom } from "utils";
+import { config } from 'dotenv';
+import { EnvFrom } from "../utils";
+
+config();
 
 export const authConfig = {
   jwt: {

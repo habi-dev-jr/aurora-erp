@@ -1,4 +1,4 @@
-import { ConfigurationError } from 'errors';
+import { ConfigurationError } from '../errors';
 import {isNil, toString} from 'lodash';
 
 export const generateUUID = (): string=> {

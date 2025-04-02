@@ -2,6 +2,7 @@ import 'multer';
 import {User} from '../entities';
 import {getConnection} from 'typeorm';
 import bcrypt from 'bcryptjs';
+import { USER_TYPE } from '../enums';
 
 export const processLogIn = async (
   username: string,
@@ -28,15 +29,27 @@ export const processLogIn = async (
   return undefined;
 };
 
-export const getUserDetail = async (userId: number, relations?: string[]) => {
-  return await getConnection()
+export const registerUser = async (
+  username: string,
+  email: string,
+  password: string
+) => {
+  const user = await getConnection()
     .getRepository(User)
     .findOne({
       where: {
-        id: userId,
+        username: username,
       },
-      relations: relations,
     });
+  if (user) throw new Error('User already exists.');
+  const encodePassword = await bcrypt.hash(password, 10);
+  return await getConnection().getRepository(User).save({
+    username: username,
+    email: email,
+    password: encodePassword,
+    isEnabled: true,
+    userType: USER_TYPE.USER
+  });
 };
 
 export const checkPasswordInvalid = async (
@@ -71,33 +84,22 @@ export const updatePassword = async (userId: number, password: string) => {
   );
 };
 
-export const registerUser = async (
-  username: string,
-  email: string,
-  password: string
-) => {
-  const user = await getConnection()
-    .getRepository(User)
-    .findOne({
-      where: {
-        username: username,
-      },
-    });
-  if (user) throw new Error('User already exists.');
-  const encodePassword = await bcrypt.hash(password, 10);
-  return await getConnection().getRepository(User).save({
-    username: username,
-    email: email,
-    password: encodePassword,
-    isEnabled: true,
-  });
-};
+// export const getUserDetail = async (userId: number, relations?: string[]) => {
+//   return await getConnection()
+//     .getRepository(User)
+//     .findOne({
+//       where: {
+//         id: userId,
+//       },
+//       relations: relations,
+//     });
+// };
 
-export const updateUser = async (userId: number, email: string) => {
-  return await getConnection().getRepository(User).update(
-    {id: userId},
-    {
-      email: email,
-    }
-  );
-};
+// export const updateUser = async (userId: number, email: string) => {
+//   return await getConnection().getRepository(User).update(
+//     {id: userId},
+//     {
+//       email: email,
+//     }
+//   );
+// };

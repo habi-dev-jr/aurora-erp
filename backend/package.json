@@ -6,7 +6,8 @@
   "scripts": {
     "clean-build": "tsc --build --clean",
     "build": "node esbuild.config.js",
-    "start": "nodemon --watch src --exec ts-node src/main.ts"
+    "start": "nodemon --watch src --exec ts-node src/main.ts",
+    "prettier": "npx prettier . --write"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "typescript": "^5.8.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.9",
@@ -38,6 +40,11 @@
     "@types/node": "^22.13.10",
     "esbuild-plugin-copy": "^2.1.1",
     "esbuild-register": "^3.6.0",
-    "nodemon": "^3.1.9"
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9",
+    "prettier": "3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.26.1"
   }
 }

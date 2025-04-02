@@ -1,8 +1,8 @@
 // Authentication and Authorization Middleware
-import { authConfig } from 'configs';
-import { AuthenticationError } from 'errors';
 import {NextFunction, Request, Response} from 'express';
-import { handleResponse } from 'helpers';
+import { authConfig } from '../configs';
+import { AuthenticationError } from '../errors';
+import { handleResponse } from '../helpers';
 
 import jwt, {JsonWebTokenError} from 'jsonwebtoken';
 

@@ -1,4 +1,4 @@
-import { AuthenticationError, ExpressValidatorError, SystemError } from 'errors';
+import { AuthenticationError, RequestValidatorError, SystemError } from '../errors';
 import logger from 'jet-logger';
 
 const UNKNOWN_ERROR = 'Unknown Error';
@@ -8,7 +8,7 @@ export function extractError(err: unknown) {
   let message: string | unknown[] = UNKNOWN_ERROR;
   let stack: string | undefined;
 
-  if (err instanceof ExpressValidatorError) {
+  if (err instanceof RequestValidatorError) {
     message = err.msg;
     name = err.name;
     stack = err.stack;

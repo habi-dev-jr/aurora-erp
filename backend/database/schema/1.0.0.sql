@@ -4,8 +4,7 @@ use `erp_db`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_type` enum('root','sub') NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
+  `user_type` enum('user','admin','root') NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `avatar` text,

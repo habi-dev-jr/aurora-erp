@@ -1,6 +1,6 @@
 import {Result, ValidationError} from 'express-validator';
 
-export class ExpressValidatorError extends Error {
+export class RequestValidatorError extends Error {
   errors: Result<ValidationError>;
   constructor(errors: Result<ValidationError>) {
     super();

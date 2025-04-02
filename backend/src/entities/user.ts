@@ -12,7 +12,7 @@ export class User {
   id: number;
 
   @Column('enum', {name: 'user_type', enum: ['root', 'sub', 'org']})
-  userType: 'root' | 'sub';
+  userType: 'user' | 'admin' | 'root';
 
   @Column('varchar', {name: 'username', unique: true, length: 50})
   username: string;
